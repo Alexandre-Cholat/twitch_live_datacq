@@ -1,0 +1,31 @@
+{
+  "timestamp_utc": "2026-09-29T12:28:58.722793+00:00",
+  "api_version": "Twitch Helix",
+  "endpoints": [
+    "https://api.twitch.tv/helix/streams",
+    "https://api.twitch.tv/helix/users"
+  ],
+  "parameters": {
+    "language": "en",
+    "target_count": 10000,
+    "batch_size": 100
+  },
+  "collected_counts": {
+    "streams": 10007,
+    "broadcasters": 8684
+  },
+  "shapes": {
+    "streams_parquet": [
+      10007,
+      15
+    ],
+    "broadcasters_parquet": [
+      8684,
+      10
+    ]
+  },
+  "storage_files": [
+    "/home/alexandre/Documents/ai_m1/Data Acquisition Processing and Mining for AI/twitch_live_datacq/data/streams.parquet",
+    "/home/alexandre/Documents/ai_m1/Data Acquisition Processing and Mining for AI/twitch_live_datacq/data/broadcasters.parquet"
+  ]
+}
