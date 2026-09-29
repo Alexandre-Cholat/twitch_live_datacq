@@ -1,0 +1,12 @@
+# Ignore cached API payloads
+cache/
+
+# Ignore local environment credentials
+.env
+
+# Ignore datasets
+data
+*.parquet
+
+# Ensure acquisition log is tracked
+!data/acquisition_log.json
