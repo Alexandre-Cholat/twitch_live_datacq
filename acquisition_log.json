@@ -1,31 +1,40 @@
 {
-  "timestamp_utc": "2026-09-29T12:28:58.722793+00:00",
+  "timestamp_utc": "2026-10-04T20:11:49.382583+00:00",
   "api_version": "Twitch Helix",
   "endpoints": [
-    "https://api.twitch.tv/helix/streams",
-    "https://api.twitch.tv/helix/users"
+    "https://api.twitch.tv/helix/games/top",
+    "https://api.twitch.tv/helix/clips",
+    "https://api.twitch.tv/helix/channels"
   ],
+  "scope_revision": "Twitch: The 100 most viewed clips from each of the top 20 game categories created between September 1 and 30, 2026, including view count, duration, language, and channel tags.",
   "parameters": {
-    "language": "en",
-    "target_count": 10000,
-    "batch_size": 100
+    "clip_started_at": "2026-09-01T00:00:00Z",
+    "clip_ended_at": "2026-09-30T23:59:59Z",
+    "games_limit": 20,
+    "clips_per_game": 100
   },
   "collected_counts": {
-    "streams": 10007,
-    "broadcasters": 8684
+    "games": 20,
+    "clips": 1892,
+    "channels": 786
   },
   "shapes": {
-    "streams_parquet": [
-      10007,
-      15
+    "games_parquet": [
+      20,
+      4
     ],
-    "broadcasters_parquet": [
-      8684,
-      10
+    "clips_parquet": [
+      1892,
+      17
+    ],
+    "channels_parquet": [
+      786,
+      11
     ]
   },
   "storage_files": [
-    "/home/alexandre/Documents/ai_m1/Data Acquisition Processing and Mining for AI/twitch_live_datacq/data/streams.parquet",
-    "/home/alexandre/Documents/ai_m1/Data Acquisition Processing and Mining for AI/twitch_live_datacq/data/broadcasters.parquet"
+    "c:\\Users\\natha\\OneDrive\\Desktop\\Coding\\M1AI\\twitch_live_datacq\\data\\games.parquet",
+    "c:\\Users\\natha\\OneDrive\\Desktop\\Coding\\M1AI\\twitch_live_datacq\\data\\clips.parquet",
+    "c:\\Users\\natha\\OneDrive\\Desktop\\Coding\\M1AI\\twitch_live_datacq\\data\\channels.parquet"
   ]
 }
