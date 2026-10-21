@@ -1,6 +1,6 @@
 # EDA findings — Twitch Top Games and Clips
 
-**Pair:** Student 1, Student 2 · **Dataset:** Top 20 Twitch games and their top 100 most viewed clips from September 2026 · **Date:** October 21, 2026
+**Pair:** Nathan Rambo Prediger, Alexandre Cholat · **Dataset:** Top 20 Twitch games and their top 100 most viewed clips from September 2026 · **Date:** October 21, 2026
 **Rows × columns:** Clips (1992 × 17), Channels (877 × 11), Games (20 × 4) · **File:** `../data/clips.parquet`, `../data/channels.parquet`, `../data/games.parquet`
 
 ---
@@ -22,7 +22,7 @@
 
 **MCAR, MAR or MNAR, and how do you know?** MAR or MNAR depending on the broadcaster's account settings (whether they enable VODs) or Twitch's retention policies for partners vs. affiliates. 
 
-**Decision.** Dropped `video_id`, `vod_offset`, and `igdb_id` entirely since they are irrelevant identifiers outside our scope. Row counts and medians are unchanged because we dropped the columns, not the rows. We also dropped `delay` from channels because all 877 values were exactly 0.
+**Decision.** Dropped `video_id`, `vod_offset`, and `igdb_id` entirely since they are irrelevant identifiers outside our scope. Row counts and medians are unchanged because we dropped the columns, not the rows. We also dropped `delay` from channels because all values were exactly 0.
 
 ---
 
@@ -37,28 +37,28 @@
 | `delay` | 0.0 | 0.0 | 0.0 | 0 | 0 |
 
 **Impossible** — violates the constraints of the data (a negative duration).
-No impossible rows were found (0 rows flagged for duration <= 0, duration > 60, negative views, or out-of-bounds dates).
+None found
 
 **Extreme but plausible**. 
-Highly viewed clips (up to 215,980 views). We are keeping them because viral outliers are genuine and expected in top clip data.
+215,980 views clips. This is expected in top clip data.
 
 **Ambiguous** — cannot be resolved from the file alone (a zero-distance trip). 
-There are 50 clips with a duration of 4.9 seconds. Since the minimum Twitch clip length is exactly 5.0 seconds, these are likely minor floating-point precision artifacts or slight clipping errors from the API. We will keep them.
+There are 50 clips with a duration of 4.9 seconds. Since the minimum Twitch clip length is exactly 5.0 seconds, these are likely small errors. We will keep them.
 
 **Shape.** 
-`view_count` is highly right-skewed. The mean (8266.01) is much higher than the median (3672.5) because a few viral clips pull the average up significantly.
+`view_count` is right-skewedbecause mean (8266.01) is much higher than the median (3672.5) because a few viral clips pull the average.
 
 ---
 
 ## 3. Temporal patterns
 
-**Range covered:** 2026-09-01T00:00:00Z to 2026-09-30T23:59:59Z. This makes sense as we explicitly queried the API for clips created in September 2026.
+**Range covered:** 2026-09-01T00:00:00Z to 2026-09-30T23:59:59Z. This makes sense, its what we asked for.
 
-**Gaps:** No major gaps identified yet, as the data spans exactly the targeted 30-day API query window.
+**Gaps:** No gaps, we visualized this.
 
-**Cycles:** We have not plotted time-of-day or day-of-week aggregations yet, but we expect viewer engagement to peak during weekends and evenings.
+**Cycles:** Tuesday, then wedsnday, are when most clips get made. By hour, big uptick starting at 10 untill 18, then bell curve trends downwards until midnight. High activity at start of month.
 
-**Timezone:** Aware. Timestamps are in UTC, enforced by parsing the `created_at` column with `pd.to_datetime(..., utc=True)`.
+**Timezone:** Timestamps are in UTC because parsing the `created_at` column with `pd.to_datetime(..., utc=True)`.
 
 ---
 
@@ -79,4 +79,4 @@ There are 50 clips with a duration of 4.9 seconds. Since the minimum Twitch clip
 1. **Missing values in game_id** - 5 channels are missing a `game_id` - We will filter these out or impute them based on the channel's most played game - Cost: loss of 5 channel records if dropped.
 2. **Temporal analysis** - We haven't explored temporal trends in clip creation - We will plot clip frequencies by day of the week / hour - Consequence: unlocks insights on when viral clips actually occur.
 3. **Analyze tags** - The `tags` column is currently a parsed list but not aggregated - We will explode the column to see tag frequency - Consequence: allows us to categorize streamers beyond just their active game.
-4. 
+   
