@@ -52,7 +52,7 @@ There are 50 clips with a duration of 4.9 seconds. Since the minimum Twitch clip
 
 ## 3. Temporal patterns
 
-**Range covered:** 2026-09-01T00:00:00Z to 2026-09-30T23:59:59Z. This makes sense, its what we asked for.
+**Range covered:** 2026-09-01T00:09:12+00:00 to 2026-09-30T23:45:15Z. This makes sense, its what we asked for.
 
 **Gaps:** No gaps, we visualized this.
 
